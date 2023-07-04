@@ -17,29 +17,29 @@ Copy and Modify nginx services to run multiple nginx on multiple ports with sepa
   and modify it:
   ```
   [Unit]
-Description=Nginx nginx3
-After=network.target
+  Description=Nginx nginx3
+  After=network.target
 
-[Service]
-Type=forking
-PIDFile=/run/nginx/nginx3.pid
-ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx3/nginx3.conf
-ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx3/nginx3.conf
-ExecReload=/usr/sbin/nginx -s reload
-ExecStop=/usr/sbin/nginx -s stop
-PrivateTmp=true
-ExecStartPre=/bin/mkdir -p /var/log/nginx/nginx3
-ExecStartPre=/bin/mkdir -p /tmp/nginx/nginx3
-ExecStartPre=/bin/chown -R nginx:nginx /var/log/nginx/nginx3
-ExecStartPre=/bin/chown -R nginx:nginx /tmp/nginx/nginx3
+  [Service]
+  Type=forking
+  PIDFile=/run/nginx/nginx3.pid
+  ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx3/nginx3.conf
+  ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx3/nginx3.conf
+  ExecReload=/usr/sbin/nginx -s reload
+  ExecStop=/usr/sbin/nginx -s stop
+  PrivateTmp=true
+  ExecStartPre=/bin/mkdir -p /var/log/nginx/nginx3
+  ExecStartPre=/bin/mkdir -p /tmp/nginx/nginx3
+  ExecStartPre=/bin/chown -R nginx:nginx /var/log/nginx/nginx3
+  ExecStartPre=/bin/chown -R nginx:nginx /tmp/nginx/nginx3
 
-[Install]
-WantedBy=multi-user.target
+  [Install]
+  WantedBy=multi-user.target
   ```
-* copy and modify nginx conf file
+* copy and modify nginx conf file:
 ```
 events {
-# something else
+
 }
 
 http {
