@@ -8,6 +8,8 @@ Create single script (startup script) for service creation and activation
 sudo touch multiple_nginx_service.sh
 ```
 and fill it out
+
+> If you need to change the number of services, ports, projects, make changes to the file in these variables: num_nginxes, num_ports, num_proj
 ```
 #!/bin/bash
 
