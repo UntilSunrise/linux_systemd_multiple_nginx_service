@@ -1,1 +1,22 @@
+[Unit]
+Description=Nginx nginx3
+After=network.target
 
+[Service]
+Type=forking
+PIDFile=/run/nginx/nginx3.pid
+ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx3/nginx3.conf -g "pid /run/nginx/nginx3.pid; error_log /var/log/nginx/nginx3/error.log;"
+ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx3/nginx3.conf -g "pid /run/nginx/nginx3.pid; error_log /var/log/nginx/nginx3/error.log;"
+ExecReload=/usr/sbin/nginx -s reload
+ExecStop=/usr/sbin/nginx -s stop
+PrivateTmp=true
+ExecStartPre=/bin/mkdir -p /run/nginx
+ExecStartPre=/bin/chown -R nginx:nginx /run/nginx/
+ExecStartPre=/bin/mkdir -p /var/log/nginx/nginx3
+ExecStartPre=/bin/mkdir -p /tmp/nginx/nginx3
+ExecStartPre=/bin/chown -R nginx:nginx /var/log/nginx/nginx3
+ExecStartPre=/bin/chown -R nginx:nginx /tmp/nginx/nginx3
+ExecStartPre=/bin/chown -R nginx:nginx /run/nginx
+
+[Install]
+WantedBy=multi-user.target
